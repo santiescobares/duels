@@ -26,6 +26,11 @@ public interface Match {
 	void finish(Player winner);
 
 	/**
+	 * Cancels the {@link Match}
+	 */
+	void cancel();
+
+	/**
 	 * Adds a spectator to the {@link Match}
 	 * 
 	 * @param player the {@link Player} to add
