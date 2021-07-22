@@ -164,7 +164,7 @@ public final class PluginMatch implements Match {
 		return this.playTimeSeconds.get();
 	}
 
-	private class MatchPlayTimeRunnable extends BukkitRunnable {
+	final class MatchPlayTimeRunnable extends BukkitRunnable {
 
 		@Override
 		public void run() {
