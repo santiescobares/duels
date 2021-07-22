@@ -23,7 +23,7 @@ public final class MatchPreventionListener implements Listener {
 			return;
 		}
 
-		if (match.getSpectators().contains(player)) {
+		if (match.isSpectating(player)) {
 			return;
 		}
 
@@ -39,7 +39,7 @@ public final class MatchPreventionListener implements Listener {
 			return;
 		}
 
-		if (match.getSpectators().contains(player)) {
+		if (match.isSpectating(player)) {
 			return;
 		}
 
@@ -55,7 +55,7 @@ public final class MatchPreventionListener implements Listener {
 			return;
 		}
 
-		if (match.getSpectators().contains(player)) {
+		if (match.isSpectating(player)) {
 			return;
 		}
 

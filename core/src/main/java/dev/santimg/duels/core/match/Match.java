@@ -26,6 +26,20 @@ public interface Match {
 	void finish(Player winner);
 
 	/**
+	 * Adds a spectator to the {@link Match}
+	 * 
+	 * @param player the {@link Player} to add
+	 */
+	void addSpectator(Player player);
+
+	/**
+	 * Removes a spectator from the {@link Match}
+	 * 
+	 * @param player the {@link Player} to remove
+	 */
+	void removeSpectator(Player player);
+
+	/**
 	 * Gets the {@link Arena} used in the {@link Match}
 	 * 
 	 * @return the {@link Arena} instance
@@ -52,6 +66,14 @@ public interface Match {
 	 * @return a {@link List} with the {@link Player}s instances
 	 */
 	List<Player> getSpectators();
+
+	/**
+	 * Checks if a {@link Player} is spectating the {@link Match}
+	 * 
+	 * @param player the {@link Player}
+	 * @return true if it's spectating
+	 */
+	boolean isSpectating(Player player);
 
 	/**
 	 * Gets the {@link Match} play time

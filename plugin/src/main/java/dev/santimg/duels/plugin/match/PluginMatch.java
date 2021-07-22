@@ -47,8 +47,12 @@ public final class PluginMatch implements Match {
 
 		this.state = MatchState.STARTING;
 
-		this.participants[0].teleport(this.arena.getLocations()[0]);
-		this.participants[1].teleport(this.arena.getLocations()[1]);
+		try {
+			this.participants[0].teleport(this.arena.getLocations()[0]);
+			this.participants[1].teleport(this.arena.getLocations()[1]);
+		} catch (NullPointerException e) {
+			throw new IllegalStateException("Either team 1 spawn or team 2 spawn is not set on arena " + this.arena.getName() + ".");
+		}
 
 		for (Player participant : this.participants) {
 			PlayerUtil.reset(participant, GameMode.SURVIVAL, true);
@@ -115,6 +119,36 @@ public final class PluginMatch implements Match {
 		});
 	}
 
+	@Override
+	public void addSpectator(Player player) {
+		if (this.isSpectating(player)) {
+			return;
+		}
+
+		this.spectators.add(player);
+
+		PlayerUtil.reset(player, GameMode.CREATIVE, false);
+
+		try {
+			player.teleport(this.arena.getLocations()[2]);
+		} catch (NullPointerException e) {
+			throw new IllegalStateException("Spectators spawn is not set on arena " + this.arena.getName() + ".");
+		}
+	}
+
+	@Override
+	public void removeSpectator(Player player) {
+		if (!this.isSpectating(player)) {
+			return;
+		}
+
+		this.spectators.remove(player);
+
+		PlayerUtil.reset(player, GameMode.SURVIVAL, true);
+
+		Duels.getInstance().getSpawnManager().teleportToSpawn(player);
+	}
+
 	/**
 	 * Performs a {@link Consumer} action on all {@link Player}s in the
 	 * {@link Match}
@@ -157,6 +191,11 @@ public final class PluginMatch implements Match {
 	@Override
 	public List<Player> getSpectators() {
 		return this.spectators;
+	}
+
+	@Override
+	public boolean isSpectating(Player player) {
+		return this.spectators.contains(player);
 	}
 
 	@Override

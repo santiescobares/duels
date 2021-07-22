@@ -14,7 +14,7 @@ import dev.santimg.duels.plugin.Duels;
 public final class MatchStartingListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onEntitDamage(EntityDamageEvent event) {
+	public void onEntityDamage(EntityDamageEvent event) {
 		if (!(event.getEntity() instanceof Player)) {
 			return;
 		}
@@ -26,7 +26,7 @@ public final class MatchStartingListener implements Listener {
 			return;
 		}
 
-		if (!match.getSpectators().contains(player)) {
+		if (match.isSpectating(player)) {
 			return;
 		}
 
@@ -38,7 +38,7 @@ public final class MatchStartingListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onEntitDamageByEntity(EntityDamageByEntityEvent event) {
+	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 		if (!(event.getDamager() instanceof Player)) {
 			return;
 		}
@@ -50,7 +50,7 @@ public final class MatchStartingListener implements Listener {
 			return;
 		}
 
-		if (!match.getSpectators().contains(player)) {
+		if (match.isSpectating(player)) {
 			return;
 		}
 
