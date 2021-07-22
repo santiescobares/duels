@@ -1,6 +1,5 @@
 package dev.santimg.duels.plugin.arena.command;
 
-import java.util.Optional;
 import java.util.Set;
 
 import org.bukkit.command.Command;
@@ -53,14 +52,12 @@ public final class ArenaCommand implements CommandExecutor {
 			}
 			case "delete": {
 				if (args.length >= 2) {
-					Optional<Arena> arenaOp = arenaManager.getByName(args[1]);
+					Arena arena = arenaManager.getByName(args[1]);
 
-					if (!arenaOp.isPresent()) {
+					if (arena == null) {
 						player.sendMessage(ChatUtil.translate("&cArena \"" + args[1] + "\" not found!"));
 						return true;
 					}
-
-					Arena arena = arenaOp.get();
 
 					if (arena.isEnabled()) {
 						player.sendMessage(ChatUtil.translate("&cYou can't delete an arena while is enabled!"));
@@ -78,15 +75,13 @@ public final class ArenaCommand implements CommandExecutor {
 			}
 			case "setlocation": {
 				if (args.length >= 3) {
-					Optional<Arena> arenaOp = arenaManager.getByName(args[1]);
+					Arena arena = arenaManager.getByName(args[1]);
 					String type = args[2];
 
-					if (!arenaOp.isPresent()) {
+					if (arena == null) {
 						player.sendMessage(ChatUtil.translate("&cArena \"" + args[1] + "\" not found!"));
 						return true;
 					}
-
-					Arena arena = arenaOp.get();
 
 					if (arena.isEnabled()) {
 						player.sendMessage(ChatUtil.translate("&cYou can't modify an arena while is enabled!"));
@@ -124,14 +119,12 @@ public final class ArenaCommand implements CommandExecutor {
 			}
 			case "toggle": {
 				if (args.length >= 2) {
-					Optional<Arena> arenaOp = arenaManager.getByName(args[1]);
+					PluginArena arena = (PluginArena) arenaManager.getByName(args[1]);
 
-					if (!arenaOp.isPresent()) {
+					if (arena == null) {
 						player.sendMessage(ChatUtil.translate("&cArena \"" + args[1] + "\" not found!"));
 						return true;
 					}
-
-					PluginArena arena = (PluginArena) arenaOp.get();
 
 					if (!arena.isEnabled()) {
 						arena.setEnabled(true);

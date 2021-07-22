@@ -1,7 +1,6 @@
 package dev.santimg.duels.core.match;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,14 +34,13 @@ public interface MatchManager {
 	 * Gets the playing {@link Match} of a player
 	 * 
 	 * @param uuid the player's {@link UUID}
-	 * @return an {@link Optional} with the {@link Match} if the player is playing
-	 *         one
+	 * @return the {@link Match} instance or null if it isn't playing one
 	 */
-	default Optional<Match> getPlayerMatch(UUID uuid) {
-		return Optional.ofNullable(this.getPlayerMatchesMap().get(uuid));
+	default Match getPlayerMatch(UUID uuid) {
+		return this.getPlayerMatchesMap().get(uuid);
 	}
 
-	default Optional<Match> getPlayerMatch(Player player) {
+	default Match getPlayerMatch(Player player) {
 		return this.getPlayerMatch(player.getUniqueId());
 	}
 }

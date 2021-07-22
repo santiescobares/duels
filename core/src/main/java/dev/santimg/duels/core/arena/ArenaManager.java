@@ -19,10 +19,10 @@ public interface ArenaManager {
 	 * Gets an {@link Arena}
 	 * 
 	 * @param name the {@link Arena}'s name
-	 * @return an {@link Optional} with the {@link Arena} if it exists
+	 * @return an {@link Arena} instance or null if it doesn't exist
 	 */
-	default Optional<Arena> getByName(String name) {
-		return this.getRepository().getCache().stream().filter(arena -> arena.getName().equals(name)).findFirst();
+	default Arena getByName(String name) {
+		return this.getRepository().getCache().stream().filter(arena -> arena.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	/**
