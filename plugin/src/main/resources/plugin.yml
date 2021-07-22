@@ -1,0 +1,9 @@
+name: ${project.name}
+author: SantiMG
+version: ${project.version}
+main: dev.santimg.duels.plugin.Duels
+
+commands:
+  arena:
+  setSpawn:
+  spawn:
