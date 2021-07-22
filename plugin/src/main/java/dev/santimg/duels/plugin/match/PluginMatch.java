@@ -57,7 +57,7 @@ public final class PluginMatch implements Match {
 		for (Player participant : this.participants) {
 			PlayerUtil.reset(participant, GameMode.SURVIVAL, true);
 
-			// TODO: load kits
+			Duels.getInstance().getKitManager().apply(participant);
 		}
 
 		new BukkitRunnable() {
