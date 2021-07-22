@@ -120,6 +120,19 @@ public final class PluginMatch implements Match {
 	}
 
 	@Override
+	public void cancel() {
+		this.forEachViewer(player -> {
+			player.sendMessage("");
+			player.sendMessage(ChatUtil.translate("&c&lThe match was cancelled by an administrator."));
+			player.sendMessage("");
+
+			PlayerUtil.reset(player, GameMode.SURVIVAL, true);
+
+			Duels.getInstance().getSpawnManager().teleportToSpawn(player);
+		});
+	}
+
+	@Override
 	public void addSpectator(Player player) {
 		if (this.isSpectating(player)) {
 			return;

@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.santimg.duels.core.arena.ArenaManager;
 import dev.santimg.duels.core.kit.KitManager;
+import dev.santimg.duels.core.match.Match;
 import dev.santimg.duels.core.match.MatchManager;
 import dev.santimg.duels.core.spawn.SpawnManager;
 import dev.santimg.duels.plugin.arena.PluginArenaManager;
@@ -40,6 +41,7 @@ public final class Duels extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		this.matchManager.getActiveMatches().forEach(Match::cancel);
 		this.arenaManager.getRepository().save();
 	}
 
