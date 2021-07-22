@@ -121,7 +121,7 @@ public final class PluginMatch implements Match {
 	 * 
 	 * @param action the {@link Consumer} action to perform
 	 */
-	void forEachViewer(Consumer<Player> action) {
+	public void forEachViewer(Consumer<Player> action) {
 		this.getAllViewing().forEach(viewer -> action.accept(viewer));
 	}
 
