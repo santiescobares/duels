@@ -1,5 +1,6 @@
 package dev.santimg.duels.core.kit;
 
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface KitManager {
@@ -12,6 +13,17 @@ public interface KitManager {
 	 *                             array
 	 */
 	void setDefaultKitContents(ItemStack[] defaultContents, ItemStack[] defaultArmorContents);
+
+	/**
+	 * Applies the default kit to a {@link Player}
+	 * 
+	 * @param player {@link Player} to apply the kit for
+	 */
+	default void apply(Player player) {
+		player.getInventory().setContents(this.getDefaultContents());
+		player.getInventory().setArmorContents(this.getDefaultArmorContents());
+		player.updateInventory();
+	}
 
 	/**
 	 * Gets the default contents of the default kit
