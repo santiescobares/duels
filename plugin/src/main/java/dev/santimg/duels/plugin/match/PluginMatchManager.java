@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
@@ -14,6 +15,7 @@ import dev.santimg.duels.core.arena.Arena;
 import dev.santimg.duels.core.match.Match;
 import dev.santimg.duels.core.match.MatchManager;
 import dev.santimg.duels.plugin.Duels;
+import dev.santimg.duels.plugin.match.listener.*;
 import dev.santimg.duels.plugin.utilities.ChatUtil;
 
 public final class PluginMatchManager implements MatchManager {
@@ -24,6 +26,11 @@ public final class PluginMatchManager implements MatchManager {
 	public PluginMatchManager() {
 		this.activeMatches = Sets.newHashSet();
 		this.playersMatchesMap = Maps.newHashMap();
+
+		Bukkit.getPluginManager().registerEvents(new MatchListener(), Duels.getInstance());
+		Bukkit.getPluginManager().registerEvents(new MatchStartingListener(), Duels.getInstance());
+		Bukkit.getPluginManager().registerEvents(new MatchPreventionListener(), Duels.getInstance());
+		Bukkit.getPluginManager().registerEvents(new MatchSpectatingListener(), Duels.getInstance());
 	}
 
 	@Override
